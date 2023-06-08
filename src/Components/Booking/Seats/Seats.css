@@ -1,0 +1,99 @@
+.seats {
+  background-color: white;
+  width: 570px;
+  height: 230px;
+  border-left: 5px solid #9ca3af;
+  margin: auto;
+  display: flex;
+  padding-right: 20px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.seats__wheel {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  margin-top: 10px;
+  transform: rotate(90deg);
+}
+
+.seprator {
+  background-color: #9ca3af;
+  width: 1.5px;
+  height: 95%;
+  margin-top: 1%;
+}
+
+.seats__arrange {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.seats__arrangeDouble {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.seats__arrangeSingle {
+  display: flex;
+  gap: 10px;
+}
+
+.seats__arrangelast {
+  display: flex;
+  align-items: center;
+}
+
+.seats__Shape {
+  border: 1px solid #9ca3af;
+  width: 75px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: #4b5563;
+  position: relative;
+  cursor: pointer;
+}
+
+.seat__pillow {
+  position: absolute;
+  right: 1px;
+  border-radius: 2px;
+  border: 1px solid #9ca3af;
+  width: 10px;
+  height: 20px;
+}
+
+.seats__Shapelast {
+  border: 1px solid #9ca3af;
+  width: 40px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+  color: #4b5563;
+  position: relative;
+}
+
+.seat__lastpillow {
+  position: absolute;
+  right: 1px;
+  border-radius: 2px;
+  border: 1px solid #9ca3af;
+  width: 10px;
+  height: 20px;
+}
+
+.seat__booked {
+  background-color: #e5e7eb;
+}
+.selected {
+  background-color: #fecaca;
+}

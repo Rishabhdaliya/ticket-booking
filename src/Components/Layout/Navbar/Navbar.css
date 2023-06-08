@@ -1,0 +1,10 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0px;
+}
+
+.navbar__layout {
+  background-color: var(--primary);
+  /* height: 80px; */
+}

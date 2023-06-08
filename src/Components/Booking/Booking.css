@@ -1,0 +1,8 @@
+.booking {
+  padding: 20px;
+}
+
+.booking__container {
+  max-width: 600px;
+  margin: auto;
+}

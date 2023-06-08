@@ -1,0 +1,27 @@
+.ticket {
+  background-color: white;
+  width: 250px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 5px;
+}
+
+.ticket__img {
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.ticket__seprator {
+  width: 100%;
+  border-top: 1px dashed rgb(77, 77, 77);
+  position: relative;
+}
+
+.ticket__barcode {
+  height: 50px;
+  margin: auto;
+  width: 130px;
+}
