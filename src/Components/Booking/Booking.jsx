@@ -6,10 +6,42 @@ import "./Booking.css";
 import BookingForm from "./Booking form/BookingForm";
 import Ticket from "./Ticket/Ticket";
 import { useState } from "react";
+import moment from "moment";
 
 const Booking = () => {
-  const contact = useSelector((state) => state);
+  const { ticketDetails } = useSelector((state) => state.ticket);
   const [step, setStep] = useState(1);
+  const [selectedSeat, setSelectedSeat] = useState([]);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    agreeTerms: false,
+  });
+
+  const selectionHandler = (seat) => {
+    if (seat.isBooked) {
+      return alert("This seat is Reserved!");
+    }
+
+    if (selectedSeat.includes(seat)) {
+      // If seat is already selected, remove it from the array
+      setSelectedSeat(
+        selectedSeat.filter((selectedSeat) => selectedSeat !== seat)
+      );
+    } else if (selectedSeat.length < 2) {
+      // If maximum selection limit is not reached, add the seat to the array
+      setSelectedSeat([...selectedSeat, seat]);
+    } else {
+      alert("You can Book maximum Two tickets ata a time");
+    }
+  };
+
+  function getCurrentDateTime() {
+    const currentDate = moment();
+    const formattedDateTime = currentDate.format("MMM-DD-YYYY [AT] hh:mmA");
+    return formattedDateTime;
+  }
 
   const handleNextStep = () => {
     setStep(step + 1);
@@ -53,13 +85,15 @@ const Booking = () => {
               <div className="flex justify-center mx-auto  text-sm font-semibold  items-center bg-red-500 text-white py-1 px-2">
                 Step {step}
               </div>
-              {step != 3 && (
+              {step === 1 && (
                 <button
                   className={`${
-                    step === 3 ? "bg-gray-400" : "bg-red-500"
+                    step === 3 || selectedSeat.length === 0
+                      ? "bg-gray-400"
+                      : "bg-red-500"
                   } text-white flex gap-1  text-sm font-semibold  items-center py-1 px-2 rounded-r`}
                   onClick={handleNextStep}
-                  disabled={step === 3}
+                  disabled={step === 3 || selectedSeat.length === 0}
                 >
                   Next
                   <svg
@@ -87,16 +121,34 @@ const Booking = () => {
           )}
           {step === 1 && (
             <div className="my-2">
-              <Seats label={"Lower Deck"} />
+              <Seats
+                selectedSeat={selectedSeat}
+                selectionHandler={selectionHandler}
+                births={ticketDetails.filter((item) => item._id < 17)}
+                label={"Lower Deck"}
+              />
             </div>
           )}
           {step === 1 && (
             <div className="my-2">
-              <Seats label={"Upper Deck"} />
+              <Seats
+                selectedSeat={selectedSeat}
+                selectionHandler={selectionHandler}
+                births={ticketDetails.filter((item) => item._id > 16)}
+                label={"Upper Deck"}
+              />
             </div>
           )}
-          {step === 2 && <BookingForm />}
-          {step === 3 && <Ticket />}
+          {step > 1 && (
+            <BookingForm
+              getCurrentDateTime={getCurrentDateTime}
+              selectedSeat={selectedSeat}
+              step={step}
+              handleNextStep={handleNextStep}
+              setFormData={setFormData}
+              formData={formData}
+            />
+          )}
         </div>
       </Layout>
     </div>

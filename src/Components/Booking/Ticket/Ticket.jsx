@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Ticket.css";
 import barcode from "../../../assets/barcode.png";
 import { Link } from "react-router-dom/dist";
 
-const Ticket = () => {
+const Ticket = ({ ticketData }) => {
+  console.log(ticketData);
   return (
     <>
       <h1 className="text-gray-700 font-semibold text-center pb-1">
@@ -29,15 +30,25 @@ const Ticket = () => {
         <div className="py-4 p-4">
           <h3 className="text-gray-500 text-xs font-light">PASSENGER</h3>
           <h3 className="text-gray-800 text-sm font-semibold">
-            RISHABH DALIYA
+            {ticketData.firstName} {ticketData.lastName}
           </h3>
           <div className="py-1 ">
             <h3 className="text-gray-500 text-xs font-light">SEAT NO</h3>
-            <h3 className="text-gray-900 text-sm font-semibold ">14A</h3>
+            {ticketData?.seatNo?.map((item, index) => (
+              <div
+                key={index}
+                className="flex gap-1"
+                style={{ display: "inline-block" }}
+              >
+                <h3 className="text-gray-900 text-sm font-semibold">
+                  {index !== 0 && ","} {item.seatNo}
+                </h3>
+              </div>
+            ))}
           </div>
           <div className="py-1 ">
             <h3 className="text-gray-500 text-xs font-normal">
-              JUN-28-2017 AT 08:30AM
+              {ticketData.dateOfBooking}
             </h3>
           </div>
           <img className="ticket__barcode" src={barcode} alt="" />

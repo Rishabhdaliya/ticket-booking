@@ -1,70 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Seats.css";
 import wheel from "../../../assets/wheel.png";
 
-const Seats = ({ label }) => {
+const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
   return (
     <div className="booking__container ">
       <h4 className="ml-3 text-gray-700">{label}</h4>
       <div className="seats">
-        <img className="seats__wheel" src={wheel} alt="" />
+        <img className="seats__wheel " src={wheel} alt="" />
         <div className="seprator"></div>
         <div className="seats__arrange">
           <div className="seats__arrangeDouble">
-            <div className="seats__Shape seat__booked">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape selected">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
+            {births
+              .filter((item, index) => index < 10)
+              .map((item, index) => (
+                <div
+                  onClick={() => selectionHandler(item)}
+                  key={index}
+                  className={`seats__Shape ${item.isBooked && "seat__booked"} ${
+                    !item.isBooked &&
+                    selectedSeat.filter((curElm) => curElm._id === item._id)
+                      .length > 0 &&
+                    "selected"
+                  } `}
+                >
+                  <div className="seat__pillow"></div>
+                  {item.seatNo}
+                </div>
+              ))}
           </div>
           <div className="seats__arrangeSingle">
-            {" "}
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
-            <div className="seats__Shape">
-              <div className="seat__pillow"></div>1
-            </div>
+            {births
+              .filter((item, index) => index > 9 && index < 15)
+              .map((item, index) => (
+                <div
+                  onClick={() => selectionHandler(item)}
+                  key={index}
+                  className={`seats__Shape ${item.isBooked && "seat__booked"} ${
+                    !item.isBooked &&
+                    selectedSeat.filter((curElm) => curElm._id === item._id)
+                      .length > 0 &&
+                    "selected"
+                  } `}
+                >
+                  <div className="seat__pillow"></div>
+                  {item.seatNo}
+                </div>
+              ))}
           </div>
         </div>
         <div className="seats__arrangelast">
-          <div className="seats__Shapelast">
-            <div className="seat__lastpillow"></div>1
-          </div>
+          {births
+            .filter((item, index) => index === 15)
+            .map((item, index) => (
+              <div
+                onClick={() => selectionHandler(item)}
+                key={index}
+                className={`seats__Shapelast ${
+                  item.isBooked && "seat__booked"
+                } ${
+                  !item.isBooked &&
+                  selectedSeat.filter((curElm) => curElm._id === item._id)
+                    .length > 0 &&
+                  "selected"
+                } `}
+              >
+                <div className="seat__lastpillow"></div>
+                {item.seatNo}
+              </div>
+            ))}
         </div>
       </div>
     </div>
