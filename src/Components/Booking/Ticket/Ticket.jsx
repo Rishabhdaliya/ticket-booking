@@ -29,11 +29,13 @@ const Ticket = ({ ticketData }) => {
 
         <div className="py-4 p-4">
           <h3 className="text-gray-500 text-xs font-light">PASSENGER</h3>
-          <h3 className="text-gray-800 text-sm font-semibold">
+          <h3 className="text-gray-800 truncate  uppercase text-sm font-semibold">
             {ticketData.firstName} {ticketData.lastName}
           </h3>
           <div className="py-1 ">
-            <h3 className="text-gray-500 text-xs font-light">SEAT NO</h3>
+            <h3 className="text-gray-500 uppercase text-xs font-light">
+              SEAT NO
+            </h3>
             {ticketData?.seatNo?.map((item, index) => (
               <div
                 key={index}
@@ -47,7 +49,7 @@ const Ticket = ({ ticketData }) => {
             ))}
           </div>
           <div className="py-1 ">
-            <h3 className="text-gray-500 text-xs font-normal">
+            <h3 className="text-gray-500 uppercase text-xs font-normal">
               {ticketData.dateOfBooking}
             </h3>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import EditBooking from "./EditBooking";
 import { removeBooking } from "../../redux/features/tickets/TicketSlice";
@@ -6,9 +6,19 @@ import { useDispatch } from "react-redux";
 
 const Reservations = () => {
   const { bookings } = useSelector((state) => state.ticket);
+  const { ticketDetails } = useSelector((state) => state.ticket);
+
   const [open, setOpen] = useState(false);
   const [updateData, setUpdateData] = useState(null);
   const dispatch = useDispatch();
+  const [available, setAvailable] = useState();
+
+  useEffect(() => {
+    let availableTicket = ticketDetails.filter(
+      (item) => item.isBooked === false
+    ).length;
+    setAvailable(availableTicket);
+  }, [ticketDetails]);
 
   const handleClose = () => {
     setOpen(false);
@@ -23,6 +33,7 @@ const Reservations = () => {
   const removeHandler = (details) => {
     dispatch(removeBooking(details));
   };
+
   return (
     <div>
       {open && (
@@ -32,6 +43,10 @@ const Reservations = () => {
           handleClose={handleClose}
         />
       )}
+
+      <h1 className="text-base ">Tickets Available: {available}</h1>
+      <h1 className="text-base">Tickets Reserved: {32 - available}</h1>
+
       {bookings.length > 0 ? (
         <div className="relative my-5 overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -59,11 +74,14 @@ const Reservations = () => {
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th
                     scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-4 font-medium max-w-[220px] truncate  text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     {curElm.firstName} {curElm.lastName}
                   </th>
-                  <td className="px-6 py-4"> {curElm.email}</td>
+                  <td className="px-6 py-4 max-w-[270px] truncate">
+                    {" "}
+                    {curElm.email}
+                  </td>
                   <td className="px-6 py-4">
                     {curElm.seatNo.map((seats, index) => (
                       <>

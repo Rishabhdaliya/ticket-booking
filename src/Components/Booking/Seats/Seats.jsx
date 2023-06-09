@@ -7,8 +7,18 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
     <div className="booking__container ">
       <h4 className="ml-3 text-gray-700">{label}</h4>
       <div className="seats">
-        <img className="seats__wheel " src={wheel} alt="" />
-        <div className="seprator">&nbsp;</div>
+        <img
+          style={{ visibility: label === "Upper Deck" && "hidden" }}
+          className="seats__wheel "
+          src={wheel}
+          alt=""
+        />
+        <div
+          className="seprator"
+          style={{ visibility: label === "Upper Deck" && "hidden" }}
+        >
+          &nbsp;
+        </div>
         <div className="seats__arrange">
           <div className="seats__arrangeDouble">
             {births
