@@ -8,7 +8,7 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
       <h4 className="ml-3 text-gray-700">{label}</h4>
       <div className="seats">
         <img className="seats__wheel " src={wheel} alt="" />
-        <div className="seprator"></div>
+        <div className="seprator">&nbsp;</div>
         <div className="seats__arrange">
           <div className="seats__arrangeDouble">
             {births
