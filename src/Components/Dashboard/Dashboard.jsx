@@ -6,6 +6,7 @@ import Reservations from "./Reservations";
 import busBg from "../../assets/busbg.png";
 
 const Dashboard = () => {
+  // Get the bookings from the Redux store
   const { bookings } = useSelector((state) => state.ticket);
 
   return (
@@ -19,6 +20,7 @@ const Dashboard = () => {
             Would you like to book a ticket?
           </h5>
 
+          {/* Render the Reservations component */}
           <Reservations />
         </div>
       </Layout>

@@ -10,8 +10,11 @@ import moment from "moment";
 
 const Booking = () => {
   const { ticketDetails } = useSelector((state) => state.ticket);
+  // Step state to manage the current step in the booking process
   const [step, setStep] = useState(1);
+  // State to keep track of the selected seats
   const [selectedSeat, setSelectedSeat] = useState([]);
+  // Form data state
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,6 +22,7 @@ const Booking = () => {
     agreeTerms: false,
   });
 
+  // Handler for seat selection
   const selectionHandler = (seat) => {
     if (seat.isBooked) {
       return alert("This seat is Reserved!");
@@ -33,20 +37,23 @@ const Booking = () => {
       // If maximum selection limit is not reached, add the seat to the array
       setSelectedSeat([...selectedSeat, seat]);
     } else {
-      alert("You can Book maximum Two tickets ata a time");
+      alert("You can Book maximum Two tickets at a time");
     }
   };
 
+  // Function to get the current date and time
   function getCurrentDateTime() {
     const currentDate = moment();
     const formattedDateTime = currentDate.format("MMM-DD-YYYY [AT] hh:mmA");
     return formattedDateTime;
   }
 
+  // Handler for the next step button
   const handleNextStep = () => {
     setStep(step + 1);
   };
 
+  // Handler for the previous step button
   const handlePrevStep = () => {
     setStep(step - 1);
   };
@@ -57,6 +64,7 @@ const Booking = () => {
         <div className="booking">
           <div className="flex justify-center mb-4 items-center">
             <div className="flex justify-center w-96">
+              {/* Button for previous step */}
               {step != 3 && (
                 <button
                   className={`${
@@ -82,11 +90,16 @@ const Booking = () => {
                   Previous
                 </button>
               )}
+
+              {/* Step indicator */}
               <div className="flex justify-center mx-auto  text-sm font-semibold  items-center bg-red-500 text-white py-1 px-2">
                 Step {step}
               </div>
-              {step === 1 && (
+
+              {/* Button for next step */}
+              {step != 3 && (
                 <button
+                  style={{ visibility: step === 2 && "hidden" }}
                   className={`${
                     step === 3 || selectedSeat.length === 0
                       ? "bg-gray-400"
@@ -114,6 +127,8 @@ const Booking = () => {
               )}
             </div>
           </div>
+
+          {/* Display message for step 1 */}
           {step === 1 && (
             <h1 className="bg-red-500 text-sm w-96 mx-auto rounded-sm  text-center text-white ">
               Click on an Available Seats to proceed with your transaction
@@ -121,6 +136,7 @@ const Booking = () => {
           )}
           {step === 1 && (
             <div className="my-2">
+              {/* Render seats for lower deck */}
               <Seats
                 selectedSeat={selectedSeat}
                 selectionHandler={selectionHandler}
@@ -131,6 +147,7 @@ const Booking = () => {
           )}
           {step === 1 && (
             <div className="my-2">
+              {/* Render seats for upper deck */}
               <Seats
                 selectedSeat={selectedSeat}
                 selectionHandler={selectionHandler}
@@ -139,6 +156,8 @@ const Booking = () => {
               />
             </div>
           )}
+
+          {/* Render booking form for steps 2 */}
           {step > 1 && (
             <BookingForm
               getCurrentDateTime={getCurrentDateTime}

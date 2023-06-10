@@ -14,6 +14,7 @@ const Reservations = () => {
   const [available, setAvailable] = useState();
 
   useEffect(() => {
+    // Calculate the number of available tickets
     let availableTicket = ticketDetails.filter(
       (item) => item.isBooked === false
     ).length;
@@ -31,7 +32,7 @@ const Reservations = () => {
   };
 
   const removeHandler = (details) => {
-    dispatch(removeBooking(details));
+    dispatch(removeBooking(details)); // Dispatch the action to remove a booking
   };
 
   return (
@@ -44,6 +45,7 @@ const Reservations = () => {
         />
       )}
 
+      {/* Display the number of available and reserved tickets */}
       <h1 className="text-base ">Tickets Available: {available}</h1>
       <h1 className="text-base">Tickets Reserved: {32 - available}</h1>
 
@@ -70,6 +72,7 @@ const Reservations = () => {
               </tr>
             </thead>
             <tbody>
+              {/* Render the list of bookings */}
               {bookings.map((curElm) => (
                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                   <th

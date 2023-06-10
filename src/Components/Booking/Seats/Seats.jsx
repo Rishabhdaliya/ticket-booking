@@ -7,12 +7,14 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
     <div className="booking__container ">
       <h4 className="ml-3 text-gray-700">{label}</h4>
       <div className="seats">
+        {/* Wheel image */}
         <img
           style={{ visibility: label === "Upper Deck" && "hidden" }}
           className="seats__wheel "
           src={wheel}
           alt=""
         />
+        {/* Separator */}
         <div
           className="seprator"
           style={{ visibility: label === "Upper Deck" && "hidden" }}
@@ -21,6 +23,7 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
         </div>
         <div className="seats__arrange">
           <div className="seats__arrangeDouble">
+            {/* Render first 10 seats */}
             {births
               .filter((item, index) => index < 10)
               .map((item, index) => (
@@ -40,6 +43,7 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
               ))}
           </div>
           <div className="seats__arrangeSingle">
+            {/* Render next 5 seats */}
             {births
               .filter((item, index) => index > 9 && index < 15)
               .map((item, index) => (
@@ -60,6 +64,7 @@ const Seats = ({ label, births, selectedSeat, selectionHandler }) => {
           </div>
         </div>
         <div className="seats__arrangelast">
+          {/* Render the last seat */}
           {births
             .filter((item, index) => index === 15)
             .map((item, index) => (

@@ -22,6 +22,7 @@ const BookingForm = ({
   const [ticketData, setTicketData] = useState(initialFormData);
 
   useEffect(() => {
+    // Update the form data with the existing booking details for updating
     if (isUpdate && updateData != null) {
       setFormData({
         firstName: updateData.firstName,
@@ -56,7 +57,6 @@ const BookingForm = ({
     dispatch(bookTicket(bookingDetails));
 
     // Perform validation or any other necessary logic
-
     if (
       !formData.firstName ||
       !formData.lastName ||
@@ -66,8 +66,7 @@ const BookingForm = ({
       return alert("Fill the Details first and confirm Booking");
     }
 
-    // Reset the form after submission
-
+    // Go to Next Step
     handleNextStep();
   };
 

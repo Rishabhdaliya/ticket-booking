@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
+  // Ticket details data array
+  // Each ticket object represents a seat
   ticketDetails: [
     {
       _id: 1,
@@ -228,7 +230,7 @@ const initialState = {
       isBooked: false,
     },
   ],
-  bookings: [],
+  bookings: [], // Array to store booked tickets
 };
 
 const ticket = createSlice({
@@ -236,6 +238,7 @@ const ticket = createSlice({
   initialState,
   reducers: {
     bookTicket: (state, action) => {
+      // Loop through each seat number in the payload
       action.payload.seatNo.forEach((seat) => {
         // Find the corresponding ticket in the ticketDetails array based on seatNo
         const ticketIndex = state.ticketDetails.findIndex(
@@ -251,13 +254,15 @@ const ticket = createSlice({
         }
       });
 
+      // Generate a unique ID for the booking
       const _id = uuidv4();
-      const contact = { ...action.payload, _id };
-      state.bookings = [...state.bookings, contact];
+      const updated = { ...action.payload, _id };
+
+      // Add the booking to the bookings array
+      state.bookings = [...state.bookings, updated];
     },
     updateBooking: (state, action) => {
-      const updatedBooking = action.payload;
-
+      // Function to update a booking in the bookings array
       function updateBooking() {
         return state.bookings.map((booking) => {
           if (booking._id === action.payload._id) {
@@ -269,6 +274,7 @@ const ticket = createSlice({
       state.bookings = updateBooking();
     },
     removeBooking: (state, action) => {
+      // Loop through each seat number in the payload
       action.payload.seatNo.forEach((seat) => {
         // Find the corresponding ticket in the ticketDetails array based on seatNo
         const ticketIndex = state.ticketDetails.findIndex(
@@ -284,10 +290,11 @@ const ticket = createSlice({
         }
       });
 
+      // Remove the booking from the bookings array
       const filteredTickets = state.bookings.filter(
         (item) => item?._id != action.payload._id
       );
-      state.bookings = [...filteredTickets];
+      state.bookings = [...filteredTickets]; // Update the bookings array
     },
   },
 });

@@ -4,9 +4,9 @@ import barcode from "../../../assets/barcode.png";
 import { Link } from "react-router-dom/dist";
 
 const Ticket = ({ ticketData }) => {
-  console.log(ticketData);
   return (
     <>
+      {/* Ticket confirmation message */}
       <h1 className="text-gray-700 font-semibold text-center pb-1">
         Congratulations! You've successfully booked your ticket!
       </h1>
@@ -21,12 +21,17 @@ const Ticket = ({ ticketData }) => {
             src="https://images.unsplash.com/photo-1598710877888-edaa20acfb92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=862&q=80"
             alt=""
           />
+
+          {/* Overlay */}
           <div class="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
+
+          {/* Ticket details */}
           <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-center">
             <p class="text-lg font-bold flex justify-between">MUM - DEL</p>
           </div>
         </div>
 
+        {/* Ticket information */}
         <div className="py-4 p-4">
           <h3 className="text-gray-500 text-xs font-light">PASSENGER</h3>
           <h3 className="text-gray-800 truncate  uppercase text-sm font-semibold">
@@ -36,6 +41,8 @@ const Ticket = ({ ticketData }) => {
             <h3 className="text-gray-500 uppercase text-xs font-light">
               SEAT NO
             </h3>
+
+            {/* Render each seat number */}
             {ticketData?.seatNo?.map((item, index) => (
               <div
                 key={index}
@@ -53,14 +60,20 @@ const Ticket = ({ ticketData }) => {
               {ticketData.dateOfBooking}
             </h3>
           </div>
+
+          {/*  Dummy Barcode */}
           <img className="ticket__barcode" src={barcode} alt="" />
         </div>
+        {/* Ticket separator */}
         <div className="ticket__seprator py-1"></div>
+
+        {/* Disclaimer */}
         <p className="italic text-gray-600 px-4 pt-2 pb-4    text-xs">
           Disclaimer: Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Cupiditate.
         </p>
       </div>
+      {/* Link to the dashboard */}
       <Link to="/">
         <button class="bg-transparent flex items-center gap-3 text-base hover:bg-red-500 text-red-700 font-semibold hover:text-white py-1 px-2 border border-red-500 hover:border-transparent rounded">
           <svg
